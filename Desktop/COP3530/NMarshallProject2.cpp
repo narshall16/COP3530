@@ -205,7 +205,7 @@ int main()
 	//dist and predecessor are arrays as shown in class lecture
 	//need help finishing this algorithms and we're set.
 	
-	struct edge { int to, length; };
+/**	struct edge { int to, length; };
     
 int dijkstra(const vector< vector<edge> > &graph, int source, int target) {
     vector<int> min_distance( graph.size(), INT_MAX );
@@ -226,24 +226,59 @@ int dijkstra(const vector< vector<edge> > &graph, int source, int target) {
     }
     return INT_MAX;
 }
-	
+**/	
 	for(int i = 0; i < realms; ++i)
 	{
-		cout << realmNames[i] << endl;
+		//cout << realmNames[i] << endl;
 		for(int j = 0; j < magiVals[i].size(); ++j)
 		{
-			cout <<  magiVals[i][j] << " ";
+			//cout <<  magiVals[i][j] << " ";
 		}
-		cout << endl;
+		//cout << endl;
 		for(int j = 0; j < seqPos[i].size(); ++j)
 		{
-			cout << realmSeq[i][seqPos[i][j]] << " ";
+			//cost1 = cost1 + realmSeq[i][seqPos[i][j]];
 		}
-		cout << endl;
+		//cout << endl;
 		cout << incantations[i] << endl;
 	}
 	
-	
+	for(int i = 0; i < realms; i++)
+	{
+		for(int j = realms-1; j >= 0; j--)
+		{
+		    if ( i == realms-1){
+                break;
+            }
+		    cout << incantations[i] << "and " << graph[i][j] << endl;
+		   if(graph[i][j] > 0 && graph[i][j] <= incantations[i]){
+            incantations[i] = graph[i][j];
+            distance = distance + graph[i][j];
+
+            //cout << "incantations " << incantations[i] << endl;
+            cout << "distance " << distance << endl;
+            //int temp = distance;
+            while(incantations[i]>0){
+                cost1 = cost1 + incantations[i];
+                incantations[i] = incantations[i] - 1;
+            }
+            cout << "cost " << cost1 << endl;
+            i = j-1;
+            //cout <<"j is " << j <<endl;
+            //cout <<"i is " << i <<endl;
+            break;
+		   }
+		}
+		if (distance == 0){
+            cout << "IMPOSSIBLE" << endl;
+            break;
+		}
+		if(i == realms-1){
+                //cout <<"i is this " << i << endl;
+                //cout <<"break" <<endl;
+            break;
+		}
+	}
 	//cout << editDistance("sunday","saturday");
 	
 	return 0;
