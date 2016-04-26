@@ -240,7 +240,7 @@ int main()
 	//counts path backwards from destination to start
 	curr = end;
 	cost = 0;
-	while(predecessor[curr] != -1)
+	while(curr != begin && length[end] != 999999)
 	{
 		//edge weight
 		temp = graph[predecessor[curr]][curr];
@@ -296,7 +296,8 @@ int main()
 	//counts path from finish to start
 	curr = end;
 	cost = 0;
-	while(curr != begin)
+	//while not at destination and if it has any edges at all
+	while(curr != begin && length[end] != 999999)
 	{
 		//edge weight
 		temp = graph[predecessor2[curr]][curr];
