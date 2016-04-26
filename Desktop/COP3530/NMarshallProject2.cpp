@@ -123,6 +123,7 @@ int main()
 	string input;
 	string start;
 	string finish;
+	int startn, finishn;
 	vector<string> realmNames;
 	vector<bool> reachable;
 
@@ -202,6 +203,12 @@ int main()
 	int distance = 0;
 	for(int i = 0; i < realms; ++i)
 	{
+	    if(realmNames[i] == start){
+            startn = i;
+        }
+        if(realmNames[i] == finish){
+            finishn = i;
+        }
 		if(realmNames[i].compare(start) == 0)
 		{
 			begin = i;
@@ -236,12 +243,13 @@ int main()
 		//cout << endl;
 		//cout << incantations[i] << endl;
 	}
-
+    bool poss = false;
     for(int i = 0; i < realms; i++)
 	{
 		for(int j = realms-1; j >= 0; j--)
 		{
 		    if ( i == realms-1){
+                poss = true;
                 break;
             }
 		    //cout << incantations[i] << "and " << graph[i][j] << endl;
@@ -271,16 +279,22 @@ int main()
 		   }
 		}
 		if (distance == 0){
-            cout << "IMPOSSIBLE" << endl;
+            //   cout << "IMPOSSIBLE" << endl;
             break;
 		}
 		if(i == realms-1){
+
                 //cout <<"i is this " << i << endl;
                 //cout <<"break" <<endl;
             break;
 		}
 	}
+	if(poss == true){
     cout << distance << " " << cost1 << endl;
+	}
+	else{
+        cout << "IMPOSSIBLE" << endl;
+	}
 	//cout << editDistance("sunday","saturday");
 
 	return 0;
