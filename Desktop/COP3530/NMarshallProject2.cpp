@@ -63,45 +63,58 @@ void maxIncantaion(vector<int> &seq, vector<int> &pos)
 	int a;
 	int b;
 	int c;
+	//vector to hold temporary longest sequences while the method is run
 	vector<int> longest(seq.size());
 	
+	//if theres no incantations in the realms (no items in the list)
 	if(seq.empty())
 	{
 		return;
 	}
 	
+	//puts first item in the position vector
 	pos.push_back(0);
 	
 	for(int i = 1; i < seq.size(); ++i)
 	{
+		//if first element in position vector is less than current element (current element is later in the list)
 		if(seq[pos.back()] < seq[i])
 		{
+			//add current position element to longest array
+			//put current element on position array
 			longest[i] = pos.back();
 			pos.push_back(i);
-			continue;
 		}
 		
 		a = 0;
 		b = pos.size() - 1;
 		while(a < b)
 		{
+			//find median value between beginning and end bound for this iteration
 			c = (a + b) / 2;
+			//if this value is less than the current item
 			if(seq[pos[c]] < seq[i])
 			{
+				//increase lower bound
 				a = c + 1;
 			}
 			else
 			{
+				//otherwise decrease upper bound
 				b = c;
 			}
 		}
 		
+		//if current item is less than the lower bound item
 		if(seq[i] < seq[pos[a]])
 		{
+			//and if not the first element
 			if(a > 0)
 			{
+				//add item to longest list
 				longest[i] = pos[a - 1];
 			}
+			//store its position in position vector
 			pos[a] = i;
 		}
 	}
